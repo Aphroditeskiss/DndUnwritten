@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Geography of Theros</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        background: #000;
+        overflow: hidden;
+    }
+
+    #map {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .pin {
+        width: 20px;
+        height: 20px;
+        position: relative;
+        background: radial-gradient(circle at 40% 35%, #ffeaa0, #bd8a14);
+        border: 2px solid #fff4c2;
+        box-shadow: 0 0 6px rgba(255,215,0,.4);
+        transition: box-shadow .2s, transform .15s;
+    }
+
+    .pin:hover {
+        box-shadow: 0 0 18px rgba(255,215,0,1), 0 0 30px rgba(255,215,0,.7);
+        transform: scale(1.1);
+        z-index: 999;
+    }
+
+    .shape-circle {
+        border-radius: 50%;
+    }
+
+    .shape-diamond {
+        transform: rotate(45deg);
+        border-radius: 4px;
+    }
+    .shape-diamond:hover {
+        transform: rotate(45deg) scale(1.1);
+    }
+
+    .shape-teardrop {
+        border-radius: 50% 50% 50% 0;
+        transform: rotate(-45deg);
+    }
+    .shape-teardrop:hover {
+        transform: rotate(-45deg) scale(1.1);
+    }
+
+    .leaflet-tooltip {
+        font-family: serif;
+        font-size: 1.05rem;
+        background: rgba(255,245,220,.95);
+        border: 2px solid #caa53a;
+        color: #3b2b0a;
+        padding: 6px 10px;
+        border-radius: 10px;
+    }
+</style>
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+const map = L.map('map', {
+    crs: L.CRS.Simple,
+    zoomControl: true,
+    maxZoom: 5,
+    minZoom: 0
+});
+
+const imgWidth = 2048;
+const imgHeight = 1536;
+const bounds = [[0,0],[imgHeight,imgWidth]];
+
+L.imageOverlay('theros_map.jpg', bounds).addTo(map);
+map.fitBounds(bounds);
+
+map.setMaxBounds(bounds);
+map.options.maxBoundsViscosity = 1.0;
+
+function makeIcon(shapeClass) {
+    return L.divIcon({
+        className: `pin ${shapeClass}`,
+        iconSize: [20, 20],
+        iconAnchor: [10, 18],
+        tooltipAnchor: [0, -10]
+    });
+}
+
+const pins = [
+    {coords:[1036, 1575], name:'Akros',   link:'akros.html',   shape:'shape-diamond'},
+    {coords:[494, 1320], name:'Meletis', link:'meletis.html', shape:'shape-circle'},
+    {coords:[664, 1667], name:'Setessa', link:'setessa.html', shape:'shape-teardrop'}
+];
+
+pins.forEach(p => {
+    const marker = L.marker(p.coords, {
+        icon: makeIcon(p.shape)
+    }).addTo(map);
+
+    marker.bindTooltip(p.name, {direction:'top', opacity:1});
+
+    marker.on('click', () => {
+        window.location.href = p.link;
+    });
+});
+
+
+const DEV_MODE = true;
+
+if (DEV_MODE) {
+    map.on('click', e => {
+        const c = [ Math.round(e.latlng.lat), Math.round(e.latlng.lng) ];
+        console.log("New pin coords:", c);
+        alert(`Coords: [${c[0]}, ${c[1]}]`);
+    });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chronicles of Meletis</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/blasten/turn.js/turn.min.js"></script>
+
+
+    <style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        background: radial-gradient(circle at center, #1e1408, #0a0703);
+        height: 100%;
+        overflow: hidden;
+    }
+
+    #book-wrapper {
+        width: 100vw;
+        height: 100vh;
+        display: grid;
+        place-items: center;
+    }
+
+    #book, .page {
+        will-change: transform;
+        -webkit-font-smoothing: antialiased;
+        backface-visibility: hidden;
+    }
+
+    #book.cover-open {
+        box-shadow: none;
+    }
+
+    #book {
+        width: 900px;
+        height: 620px;
+        box-shadow: 0 20px 60px rgba(0,0,0,.8);
+            position: relative;
+        transform-origin: center center;
+        z-index: 1;
+    }
+
+    .page {
+        width: 450px;
+        height: 620px;
+        overflow: hidden; 
+        backface-visibility: hidden;
+        transform-style: preserve-3d;
+    }
+
+    .page-inner {
+        width: 100%;
+        height: 100%;
+        padding: 40px 32px;
+        box-sizing: border-box;
+
+        background: #f3e8cf url("https://media.istockphoto.com/id/654922866/photo/old-yellowed-stained-paper-texture.jpg?s=612x612&w=0&k=20&c=uInwuGGMQMw2RKMillvZz5suVDgIcKD7yvrOmoPVt-k=");
+        background-size: 870px;
+        background-repeat: no-repeat;
+        border: 3px solid #a3873a;
+        border-radius: 10px;
+        box-shadow: inset 0 0 30px rgba(0,0,0,.25);
+
+        font-family: "IM Fell DW Pica", serif;
+        font-size: 18px;
+        line-height: 1.5;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .page h1,
+    .page h2 {
+    font-family: "Cinzel", serif;
+        letter-spacing: .05em;
+        margin-top: 0;
+    }
+
+    .page h1 {
+        font-size: 32px;
+        text-align: center;
+    }
+
+    .page h2 {
+        margin-top: 12px;
+        margin-bottom: 6px;
+    }
+
+    .divider  {
+        margin: 12px auto 16px;
+        width: 70%;
+        height: 2px;
+        background: linear-gradient(to right, transparent, #7a5b21, transparent);
+    }
+
+    .hard .page-inner {
+        background: linear-gradient(135deg, #5e4821, #2c1c0b);
+        color: #f7e7c4;
+        border: 4px solid #caa652;
+        box-shadow: inset 0 0 25px rgba(0,0,0,.6);
+        font-family: "IM Fell DW Pica", serif;
+    }
+
+
+    .cover-title {
+        font-size: 34px;
+        text-align: center;
+        margin-top: 180px;
+        letter-spacing: .08em;
+    }
+
+    #nav {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 16px;
+            z-index: 9999;
+
+    }
+
+    .nav-btn {
+        padding: 10px 16px;
+        border-radius: 12px;
+        font-family: "IM Fell DW Pica", serif;
+        background: #2c1c0b;
+        color: #f4e9c6;
+        border: 2px solid #caa652;
+        cursor: pointer;
+        transition: .15s;
+    }
+
+    .nav-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 12px rgba(255,215,0,.4);
+    }
+
+    .image-container {
+    text-align: center;     
+    margin: 16px 0;        
+}
+
+.image-container img {
+    max-width: 100%;         
+    max-height: 250px;       
+    border: 2px solid #a3873a;
+    border-radius: 6px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.3);
+}
+    </style>
+    </head>
+
+    <body>
+
+    <div id="book-wrapper">
+        <div id="book">
+
+        <div class="page hard">
+            <div class="page-inner">
+                <div class="cover-title">Liber Meletis</div>
+            </div>
+        </div>
+
+        <div class="page">
+            <div class="page-inner">
+                <h1 style="text-align: center;">Meletis</h1>
+
+                <p>
+                    Meletis is the city of thinkers and scholars. It's built along the Siren Sea and is known for its innovation and magic learning. The city values education, intellect, and the study of gods above anything else. Its streets are built from beautiful patterned bricks and temples to the gods are found in every corner. 
+                </p>
+
+                <p>
+                    The citizens of Meletis are mostly humans, but most outsiders are welcome, as long as they have good intentions. Titons, centaurs, and sometimes satyrs live or trade there. Philosophers, scholars, and thaumaturges are highly respected, and magic is considered to be a gift from the gods and an art. Thecity is protected by the Reverent Army, which aims to spread the word of the gods and defend the polis. 
+                </p>
+            </div>
+        </div>
+
+        <div class="page">
+            <div class="page-inner">
+                
+                <h2 style="text-align: center;">The Council</h2>
+                <div class="divider"></div>
+
+                <p>The city is ruled by The Twelve, a council of philosophers who guide Meletis. They debate about law, education, and the use of magic, and each of the councilers have their own ethics and interests. 
+</p>
+                <h2 style="text-align: center;">Locations</h2>
+                                <div class="divider"></div>
+
+                <p>
+                    Some of the most well-known places in Meletis include the Dekatia, which is a  massive academy for magic and philosophy, the Observatory, a place where you can study Nyx, and the Harbor, which is the trading hub of Meletis. 
+                </p>
+            </div>
+        </div>
+
+        <div class="page">
+            <div class="page-inner">
+                <h2 style="text-align: center;">Visualizations</h2>
+                <div class="divider"></div>
+
+                <div class="image-container">
+            <img src="meletis.png" alt="Meletis city" />
+        </div>
+
+                <p>
+                    <i>"Evil flourishes where ignorance thrives." - Perisophia</i>
+                </p>
+
+            </div>
+        </div>
+
+        <div class="page hard">
+            <div class="page-inner">
+                <div class="cover-title">End of Volume</div>
+            
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+    <div id="nav">
+        <button class="nav-btn" id="prev">⟵ Previous</button>
+        <button class="nav-btn" id="next">Next ⟶</button>
+        <button class="nav-btn" onclick="history.back()">Return to Map</button>
+    </div>
+
+    <script>
+    $('#book').turn({
+        width: 900,
+        height: 620,
+        autoCenter: true,
+        gradients: true,
+        elevation: 70,
+        duration: 1200,   
+        acceleration: true
+    });
+
+    $('#book').on('turned', function (e, page) {
+        if (page === 1) {
+            $('#book').addClass('cover-open');
+        } else {
+            $('#book').removeClass('cover-open');
+        }
+    });
+
+    $('#book').addClass('cover-open');
+
+
+
+    document.getElementById("next").onclick = () => $('#book').turn('next');
+    document.getElementById("prev").onclick = () => $('#book').turn('previous');
+
+    function scaleBook() {
+        const book = document.getElementById("book");
+        const scale = Math.min(
+            window.innerWidth / 1100,
+            window.innerHeight / 750
+        );
+
+        book.style.transform = `translateZ(0) scale(${scale})`;
+    }
+
+    scaleBook();
+    window.addEventListener("resize", scaleBook);
+    </script>
+
+    </body>
+    </html>

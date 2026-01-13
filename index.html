@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Theros</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 20, 0.7), rgba(0, 0, 30, 0.8)),
+                        url('nyx_theros.png') center/cover fixed;
+            color: #f0e6d2;
+            font-family: 'EB Garamond', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        canvas#stars {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        header {
+            margin-bottom: 60px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 5rem;
+            margin: 0;
+            letter-spacing: 0.1em;
+        }
+
+        p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 20px auto;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .btn {
+            background: linear-gradient(to bottom, #b8860b, #8b6914);
+            border: 4px solid #ffd700;
+            border-radius: 15px;
+            padding: 20px 50px;
+            font-size: 1.8rem;
+            font-family: 'Cinzel Decorative', cursive;
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 215, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.6);
+        }
+
+        #portal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 20, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .portal {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 8px solid #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 80px #ffd700, inset 0 0 60px rgba(255, 215, 0, 0.6);
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .portal::before {
+            content: '';
+            position: absolute;
+            inset: 20px;
+            border: 4px dashed #ffd700;
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        .portal::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(255,215,0,0.6) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .portal-text {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 2.8rem;
+            color: #ffd700;
+            text-shadow: 0 0 30px gold;
+            opacity: 0;
+            z-index: 11;
+            transition: opacity 1.5s;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 1rem;
+            opacity: 0.8;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="stars"></canvas>
+
+    <header>
+        <h1>Theros</h1>
+        <p> This world is a hot mess but fuck it we ball</p>
+    </header>
+
+    <div class="buttons">
+        <div class="btn" data-target="geography.html" data-title="Entering the Realm of Geography...">Geography</div>
+        <div class="btn" data-target="history.html" data-title="Entering the Realm of History...">History</div>
+    </div>
+
+    <footer>Enter my glorious world NYEHEHEHE</footer>
+
+    <div id="portal-overlay">
+        <div class="portal"></div>
+        <div class="portal-text" id="portal-text"></div>
+    </div>
+
+    <script> //test!!
+        const canvas = document.getElementById('stars');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const stars = [];
+        for (let i = 0; i < 300; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 1.5 + 0.5,
+                opacity: Math.random(),
+                speed: Math.random() * 0.01 + 0.005
+            });
+        }
+
+        const sparks = [];
+        for (let i = 0; i < 20; i++) {
+            sparks.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 3 + 1,
+                speedX: (Math.random() - 0.5) * 0.5,
+                speedY: (Math.random() - 0.5) * 0.5
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            stars.forEach(star => {
+                star.opacity += star.speed;
+                if (star.opacity > 1 || star.opacity < 0.2) star.speed *= -1;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 200, ${star.opacity})`;
+                ctx.fill();
+            });
+
+            sparks.forEach(spark => {
+                spark.x += spark.speedX;
+                spark.y += spark.speedY;
+                if (spark.x < 0 || spark.x > canvas.width) spark.speedX *= -1;
+                if (spark.y < 0 || spark.y > canvas.height) spark.speedY *= -1;
+                ctx.beginPath();
+                ctx.arc(spark.x, spark.y, spark.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 215, 0, 0.8)';
+                ctx.fill();
+            });
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        const overlay = document.getElementById('portal-overlay');
+        const portal = document.querySelector('.portal');
+        const portalText = document.getElementById('portal-text');
+
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = this.dataset.target;
+                const title = this.dataset.title;
+
+                const rect = this.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                portal.style.left = `${centerX}px`;
+                portal.style.top = `${centerY}px`;
+
+                portalText.textContent = title;
+                overlay.style.display = 'flex';
+
+                setTimeout(() => {
+                    portal.style.transition = 'transform 2s ease-out, opacity 1s ease-in';
+                    portal.style.transform = 'scale(20)';
+                    portal.style.opacity = '1';
+                    portal.style.width = '400px'; 
+                    portal.style.height = '400px';
+
+                    portal.style.setProperty('--after-opacity', '1'); 
+                    portal.querySelector('::after') ? null : (portal.style.setProperty('after-opacity', '1'));
+                    portal.offsetHeight; 
+                    portal.querySelectorAll('::after')[0] ? null : null;
+                    portal.style.setProperty('background', 'radial-gradient(circle, rgba(255,215,0,0.6) 0%, transparent 70%)'); // No
+                    setTimeout(() => {
+                        portal.style.setProperty('box-shadow', '0 0 120px #ffd700, inset 0 0 100px rgba(255, 215, 0, 0.8)');
+                    }, 500);
+
+                    setTimeout(() => {
+                        portalText.style.opacity = '1';
+                    }, 800);
+
+                    setTimeout(() => {
+                        overlay.style.background = 'radial-gradient(circle, #ffd700, #ffffff)';
+                        overlay.style.transition = 'background 1s ease';
+                        setTimeout(() => {
+                            window.location.href = target;
+                        }, 1000);
+                    }, 2600);
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html> 

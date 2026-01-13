@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>God Index - Constellation</title>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: 'Cinzel', serif;
+        background: url('nyx.png') no-repeat center center fixed;
+        background-size: cover;
+        overflow: hidden;
+        color: white;
+        cursor: crosshair;
+    }
+
+    #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+        font-size: 4em;
+        text-align: center;
+        pointer-events: none;
+    }
+
+    #constellation {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .star {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: white;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .star:hover {
+        transform: scale(1.5);
+        box-shadow: 0 0 15px 5px white;
+    }
+
+    #coordsDisplay {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        background: rgba(0,0,0,0.5);
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        z-index: 3;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+
+<div id="constellation">
+    <div class="star" data-god="Erebos" style="top:674px; left:1054px;" onclick="goToGod('erebos.html')"></div>
+    <div class="star" data-god="Heliod" style="top:118px; left:750px;" onclick="goToGod('heliod.html')"></div>
+    <div class="star" data-god="Thassa" style="top:686px; left:666px;" onclick="goToGod('thassa.html')"></div>
+    <div class="star" data-god="Athreos" style="top:176px; left:988px;" onclick="goToGod('thassa.html')"></div>
+    <div class="star" data-god="Phenax" style="top:377px; left:637px;" onclick="goToGod('thassa.html')"></div>
+    <div class="star" data-god="Seth" style="top:297px; left:620px;" onclick="goToGod('thassa.html')"></div>
+    <div class="star" data-god="Kruphix" style="top:340px; left:926px;" onclick="goToGod('thassa.html')"></div>
+    <div class="star" data-god="Klothys" style="top:316px; left:935px ;" onclick="goToGod('thassa.html')"></div>
+    <div class="star" data-god="Purphoros" style="top:689px; left:901px;" onclick="goToGod('thassa.html')"></div>
+    <div class="star" data-god="Mogis" style="top:114px; left:625px;" onclick="goToGod('thassa.html')"></div>
+    <div class="star" data-god="Iroas" style="top:144px; left:611px;" onclick="goToGod('thassa.html')"></div>
+    <div class="star" data-god="Theophania" style="top:118px; left:964px;" onclick="goToGod('thassa.html')"></div>
+    <div class="star" data-god="Myrron" style="top:620px; left:453px;" onclick="goToGod('thassa.html')"></div>
+    <div class="star" data-god="Pharika" style="top:446px; left:519px;" onclick="goToGod('thassa.html')"></div>
+    <div class="star" data-god="Nylea" style="top:446px; left:519px;" onclick="goToGod('thassa.html')"></div>
+    <div class="star" data-god="Ephara" style="top:446px; left:519px;" onclick="goToGod('thassa.html')"></div>
+    <div class="star" data-god="Karametra" style="top:446px; left:519px;" onclick="goToGod('thassa.html')"></div>
+
+</div>
+
+<div id="overlay"></div>
+<div id="coordsDisplay">Click anywhere to get coordinates</div>
+
+<script>
+    const stars = document.querySelectorAll('.star');
+    const overlay = document.getElementById('overlay');
+    const coordsDisplay = document.getElementById('coordsDisplay');
+
+    stars.forEach(star => {
+        star.addEventListener('mouseenter', () => {
+            overlay.style.display = 'flex';
+            overlay.textContent = star.getAttribute('data-god');
+        });
+        star.addEventListener('mouseleave', () => {
+            overlay.style.display = 'none';
+        });
+    });
+
+    function goToGod(url) {
+        window.location.href = url;
+    }
+
+    document.addEventListener('click', (e) => {
+        if(e.target.classList.contains('star')) return;
+
+        const x = e.clientX;
+        const y = e.clientY;
+        coordsDisplay.textContent = `X: ${x}px, Y: ${y}px`;
+    });
+</script>
+
+</body>
+</html>
