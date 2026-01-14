@@ -6,11 +6,7 @@
     <title>Choose Your Legend</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=EB+Garamond:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin:0; padding:0; box-sizing:border-box; }
 
         body {
             min-height: 100vh;
@@ -69,8 +65,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-decoration: none;
             color: #f0e6d2;
+            cursor: pointer;
             transition: all 0.4s ease;
             transform: perspective(1000px) rotateX(0deg);
         }
@@ -94,22 +90,6 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            transition: all 0.5s ease;
-            position: relative;
-        }
-
-        .medallion::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            box-shadow: inset 0 0 40px rgba(0,0,0,0.6);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .character-btn:hover .medallion::after {
-            opacity: 1;
         }
 
         .medallion img {
@@ -118,7 +98,6 @@
             object-fit: cover;
             border-radius: 50%;
             border: 4px solid #d4af37;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
         }
 
         .character-name {
@@ -126,14 +105,82 @@
             font-family: 'Cinzel Decorative', cursive;
             font-size: 2.2rem;
             text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
-            letter-spacing: 0.08em;
         }
 
-        @media (max-width: 900px) {
-            h1 { font-size: 4.5rem; }
-            .characters-grid { gap: 30px; }
-            .medallion { width: 160px; height: 160px; }
-            .character-name { font-size: 1.9rem; }
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: url('https://opengameart.org/sites/default/files/parchment_texture.jpg') center/cover;
+            border: 10px solid #b8860b;
+            border-radius: 15px;
+            box-shadow: 0 0 60px rgba(255,215,0,0.7);
+            width: 90%;
+            max-width: 480px;
+            padding: 40px 30px;
+            text-align: center;
+            color: #3e2723;
+        }
+
+        .modal-content h2 {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 2.8rem;
+            color: #6d4c41;
+            margin-bottom: 20px;
+        }
+
+        .modal-content input {
+            width: 100%;
+            max-width: 320px;
+            padding: 14px;
+            font-size: 1.3rem;
+            font-family: 'EB Garamond', serif;
+            border: 3px solid #8b6914;
+            border-radius: 8px;
+            background: rgba(255,255,240,0.9);
+            margin: 20px 0 15px;
+            text-align: center;
+        }
+
+        .modal-content button {
+            background: linear-gradient(to bottom, #b8860b, #8b6914);
+            border: 4px solid #ffd700;
+            color: white;
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 1.5rem;
+            padding: 14px 40px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-content button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 30px rgba(255,215,0,0.6);
+        }
+
+        .error {
+            color: #c62828;
+            font-size: 1.3rem;
+            margin-top: 12px;
+            min-height: 24px;
+        }
+
+        .shake {
+            animation: shake 0.4s;
+        }
+
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            25%  { transform: translateX(-10px); }
+            75%  { transform: translateX(10px); }
         }
     </style>
 </head>
@@ -141,45 +188,49 @@
     <canvas id="stars"></canvas>
 
     <header>
-        <h1>Choose Your Character</h1>
-        <p class="subtitle">FAGGOTS FAGGOTS FAGGOTS!!!</p>
+        <h1>Choose Your Legend</h1>
+        <p class="subtitle">Only the worthy may enter the realms...</p>
     </header>
 
     <div class="characters-grid">
-        <a href="athena.html" class="character-btn">
-            <div class="medallion">
-                <img src="Athena/athena.png" alt="Athena">
-            </div>
+        <div class="character-btn" data-char="athena" data-realm="Athena/index.html">
+            <div class="medallion"><img src="Athena/athena.png" alt="Athena"></div>
             <div class="character-name">Athena</div>
-        </a>
+        </div>
 
-        <a href="kyreth.html" class="character-btn">
-            <div class="medallion">
-                <img src="Kyreth/kyreth.png" alt="Kyreth">
-            </div>
+        <div class="character-btn" data-char="kyreth" data-realm="Kyreth/index.html">
+            <div class="medallion"><img src="Kyreth/kyreth.png" alt="Kyreth"></div>
             <div class="character-name">Kyreth</div>
-        </a>
+        </div>
 
-        <a href="khaos.html" class="character-btn">
-            <div class="medallion">
-                <img src="Khaos/khaos.png" alt="Khaos">
-            </div>
+        <div class="character-btn" data-char="khaos" data-realm="Khaos/index.html">
+            <div class="medallion"><img src="Khaos/khaos.png" alt="Khaos"></div>
             <div class="character-name">Khaos</div>
-        </a>
+        </div>
 
-        <a href="elysia.html" class="character-btn">
-            <div class="medallion">
-                <img src="Elysia/elysia.png" alt="Elysia">
-            </div>
+        <div class="character-btn" data-char="elysia" data-realm="Elysia/index.html">
+            <div class="medallion"><img src="Elysia/elysia.png" alt="Elysia"></div>
             <div class="character-name">Elysia</div>
-        </a>
+        </div>
 
-        <a href="jormungandr.html" class="character-btn">
-            <div class="medallion">
-                <img src="Jormie/jormie.png" alt="Jörmungandr">
-            </div>
+        <div class="character-btn" data-char="jormungandr" data-realm="Jormie/index.html">
+            <div class="medallion"><img src="Jormie/jormie.png" alt="Jörmungandr"></div>
             <div class="character-name">Jörmungandr</div>
-        </a>
+        </div>
+    </div>
+
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Enter the Secret Word</h2>
+            <input type="password" id="passwordInput" placeholder="Password..." autocomplete="off"/>
+            <button id="submitPassword">Unlock Realm</button>
+            <div class="error" id="errorMsg"></div>
+        </div>
+    </div>
+
+    <div id="portal-overlay">
+        <div class="portal"></div>
+        <div class="portal-text" id="portal-text"></div>
     </div>
 
     <script>
@@ -213,6 +264,79 @@
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+        });
+
+        const passwords = {
+            athena: "Ath3na!",
+            kyreth: "Kyr3th",
+            khaos: "Kh@os",
+            elysia: "Elys1a",
+            jormungandr: "Jorm13"
+        };
+
+        const modal = document.getElementById('passwordModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const passwordInput = document.getElementById('passwordInput');
+        const submitBtn = document.getElementById('submitPassword');
+        const errorMsg = document.getElementById('errorMsg');
+        const overlay = document.getElementById('portal-overlay');
+        const portal = document.querySelector('.portal');
+        const portalText = document.getElementById('portal-text');
+
+        let currentChar = null;
+        let currentRealm = null;
+
+        document.querySelectorAll('.character-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentChar = btn.dataset.char;
+                currentRealm = btn.dataset.realm;
+
+                modalTitle.textContent = `Realm of ${currentChar.charAt(0).toUpperCase() + currentChar.slice(1)}`;
+                modal.style.display = 'flex';
+                passwordInput.value = '';
+                errorMsg.textContent = '';
+                passwordInput.focus();
+            });
+        });
+
+        submitBtn.addEventListener('click', () => {
+            const input = passwordInput.value.trim();
+            const correctPassword = passwords[currentChar];
+
+            if (input === correctPassword) {
+                portalText.textContent = `Entering the Realm of ${currentChar}...`;
+                overlay.style.display = 'flex';
+
+                setTimeout(() => {
+                    portal.style.transition = 'transform 2s ease-out, opacity 1s ease-in';
+                    portal.style.transform = 'scale(20)';
+                    portal.style.opacity = '1';
+
+                    setTimeout(() => portalText.style.opacity = '1', 800);
+
+                    setTimeout(() => {
+                        overlay.style.background = 'radial-gradient(circle, #ffd700, #ffffff)';
+                        overlay.style.transition = 'background 1s ease';
+                        setTimeout(() => window.location.href = currentRealm, 1000);
+                    }, 2600);
+                }, 100);
+            } else {
+                errorMsg.textContent = "Wrong password... Access denied.";
+                errorMsg.classList.add('shake');
+                setTimeout(() => errorMsg.classList.remove('shake'), 500);
+            }
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                submitBtn.click();
+            }
         });
     </script>
 </body>
