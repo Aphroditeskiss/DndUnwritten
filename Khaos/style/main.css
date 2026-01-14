@@ -15,6 +15,7 @@
 
     /* Accents */
     --fate-gold: #d4af37;
+    --fate-gold-low-opacity: #d4af3766;
     --ash-silver: #c9ccd6;
 
     /* Header-specific */
@@ -32,7 +33,7 @@ body {
     background-color: var(--abyss-teal);
     margin: 0%;
     padding: 1%;
-    padding-top: 7%;
+    padding-top: 5%;
 }
 
 * {
@@ -121,8 +122,11 @@ nav li a:hover {
 }
 
 textarea {
+    width: 99%;
+    min-height: 200px;
+    padding: 10px;
+    resize: vertical;
     background-color: var(--void-black);
     color: var(--ivory-white);
-    border-color: var(--fate-gold);
-    border-width: 1px;
+    border: 1px solid var(--fate-gold-low-opacity);
 }

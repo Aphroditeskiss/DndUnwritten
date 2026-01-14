@@ -91,3 +91,71 @@ function verifyLogin()
             </script>';
     }
 }
+
+function submitNote()
+{
+    if (!isset($_POST['addNote']) || trim($_POST['addNote']) === '') {
+        return;
+    }
+
+    $note = $_POST['addNote'];
+    $conn = dbConnect();
+
+    $stmt = $conn->prepare("INSERT INTO notes (note) VALUES (?)");
+    $stmt->bind_param("s", $note);
+    $stmt->execute();
+
+    $stmt->close();
+    $conn->close();
+
+    echo '<script>
+            alert("Submitted!");
+            window.redirect.href(notes);
+            </script>';
+}
+
+function getNotes()
+{
+    $conn = dbConnect();
+
+    $sql = "SELECT * FROM notes";
+    $result = $conn->query($sql) or die($conn->error);
+    $notes = $result->fetch_all(MYSQLI_ASSOC);
+
+    return $notes;
+}
+
+function getNote($noteId)
+{
+    $conn = dbConnect();
+
+    $sql = "SELECT * FROM notes WHERE id =" . $noteId;
+    $result = $conn->query($sql) or die($conn->error);
+    $note = $result->fetch_assoc();
+
+    return $note;
+}
+
+function displayNotes()
+{
+    if (!isset($_GET['noteId'])) {
+        $notes = getNotes();
+        foreach ($notes as $note) {
+            ?>
+            <a href="notes?noteId=<?php echo $note['id'] ?>">Note <?php echo $note['id'] ?></a>
+            <p><?php echo $note['note'] ?></p>
+            <?php
+        }
+    } else {
+        $note = getNote($_GET['noteId']);
+        ?>
+        <a href="notes">Go back</a>
+        <p><?php echo $note['note'] ?></p><br>
+        <form method="post">
+            <textarea name="editNote" id="editNote"><?php echo $note['note'] ?></textarea><br>
+            <input type="submit" name="editNote" id="editNote">
+            <input type="submit" name="deleteNote" id="deleteNote" value="Delete">
+        </form>
+        <?php
+    }
+}
