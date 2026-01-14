@@ -1,0 +1,58 @@
+:root {
+  --god-color: #fff;
+}
+
+body {
+  background: radial-gradient(circle at top, #0b0d17, #02030a);
+  color: #eaeaff;
+  font-family: 'Cinzel', serif;
+  margin: 0;
+  padding: 2rem;
+}
+
+.god-page {
+  max-width: 900px;
+  margin: auto;
+}
+
+.god-header {
+  text-align: center;
+}
+
+.god-header img {
+  width: 220px;
+  filter: drop-shadow(0 0 20px var(--god-color));
+}
+
+h1 {
+  font-size: 3rem;
+  color: var(--god-color);
+}
+
+h2 {
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+.description {
+  font-size: 1.1rem;
+  margin: 2rem 0;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  background: rgba(255,255,255,0.05);
+  padding: 1.5rem;
+  border-left: 4px solid var(--god-color);
+}
+
+.god-tenets ul {
+  list-style: "✦ ";
+  padding-left: 1.5rem;
+}
+
+.god-tenets li {
+  margin: 0.5rem 0;
+}
