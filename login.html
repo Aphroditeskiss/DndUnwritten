@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Choose Your Legend</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=EB+Garamond:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 20, 0.75), rgba(0, 0, 30, 0.85)),
+                        url('img/nyx.png') center/cover fixed;
+            color: #f0e6d2;
+            font-family: 'EB Garamond', serif;
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        canvas#stars {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            z-index: 10;
+            margin-bottom: 60px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+        }
+
+        h1 {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: clamp(3.5rem, 8vw, 6.5rem);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.2em;
+        }
+
+        .subtitle {
+            font-size: 1.6rem;
+            opacity: 0.9;
+            max-width: 700px;
+        }
+
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            width: 100%;
+            padding: 0 20px;
+            z-index: 10;
+        }
+
+        .character-btn {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #f0e6d2;
+            transition: all 0.4s ease;
+            transform: perspective(1000px) rotateX(0deg);
+        }
+
+        .character-btn:hover {
+            transform: perspective(1000px) rotateX(8deg) scale(1.08);
+            filter: brightness(1.15);
+        }
+
+        .medallion {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 8px solid #ffd700;
+            box-shadow: 
+                0 0 40px rgba(255, 215, 0, 0.6),
+                inset 0 0 30px rgba(255, 215, 0, 0.4);
+            background: radial-gradient(circle at 30% 30%, rgba(255,215,0,0.3), transparent 70%),
+                        url('https://opengameart.org/sites/default/files/parchment_texture.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .medallion::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.6);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .character-btn:hover .medallion::after {
+            opacity: 1;
+        }
+
+        .medallion img {
+            width: 90%;
+            height: 90%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #d4af37;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .character-name {
+            margin-top: 20px;
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 2.2rem;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+            letter-spacing: 0.08em;
+        }
+
+        @media (max-width: 900px) {
+            h1 { font-size: 4.5rem; }
+            .characters-grid { gap: 30px; }
+            .medallion { width: 160px; height: 160px; }
+            .character-name { font-size: 1.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="stars"></canvas>
+
+    <header>
+        <h1>Choose Your Legend</h1>
+        <p class="subtitle">Heroes, primordials, gods and serpents await your call...</p>
+    </header>
+
+    <div class="characters-grid">
+        <a href="athena.html" class="character-btn">
+            <div class="medallion">
+                <img src="img/athena.png" alt="Athena">
+            </div>
+            <div class="character-name">Athena</div>
+        </a>
+
+        <a href="kyreth.html" class="character-btn">
+            <div class="medallion">
+                <img src="img/kyreth.png" alt="Kyreth">
+            </div>
+            <div class="character-name">Kyreth</div>
+        </a>
+
+        <a href="khaos.html" class="character-btn">
+            <div class="medallion">
+                <img src="img/khaos.png" alt="Khaos">
+            </div>
+            <div class="character-name">Khaos</div>
+        </a>
+
+        <a href="elysia.html" class="character-btn">
+            <div class="medallion">
+                <img src="img/elysia.png" alt="Elysia">
+            </div>
+            <div class="character-name">Elysia</div>
+        </a>
+
+        <a href="jormungandr.html" class="character-btn">
+            <div class="medallion">
+                <img src="img/jormie.png" alt="Jörmungandr">
+            </div>
+            <div class="character-name">Jörmungandr</div>
+        </a>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('stars');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const stars = Array.from({length: 250}, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 1.4 + 0.4,
+            o: Math.random() * 0.7 + 0.3,
+            s: Math.random() * 0.008 + 0.003
+        }));
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(s => {
+                s.o += (Math.random() - 0.5) * s.s;
+                s.o = Math.max(0.2, Math.min(1, s.o));
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255,255,220,${s.o})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
