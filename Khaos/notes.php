@@ -1,10 +1,10 @@
 <?php 
 
 require('inc/functions.php');
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        verifyLogin();
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['loginSubmit'])) {
+    verifyLogin();
 } 
-if (!isset($_SESSION['is_allowed']) || $_SESSION['is_allowed'] !== true) {
+if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     login();
 }
 
@@ -18,6 +18,7 @@ head("Notes")
 <body>
     <?php
     khaosHeader();
+    if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
     ?>
     <div class="addNote">
         <form method="post">
@@ -26,5 +27,8 @@ head("Notes")
             <input type="submit" name="submitNote" id="submitNote">
         </form>
     </div>
+    <?php
+    }
+    ?>
 </body>
 </html>

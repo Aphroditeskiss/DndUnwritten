@@ -50,6 +50,7 @@ function khaosHeader()
                 <li><a href="notes">Notes</a></li>
                 <li><a href="spells">Spells</a></li>
                 <li><a href="combat">Combat Features</a></li>
+                <li><a href="unset">Log out</a></li>
             </ul>
         </nav>
     </header>
@@ -82,7 +83,7 @@ function verifyLogin()
     $hash = $result->fetch_assoc();
 
     if (password_verify($password, $hash['password'])) {
-        $_SESSION['is_allowed'] = True;
+        $_SESSION['loggedIn'] = True;
     } else {
         echo '<script>
             alert("WRONG");

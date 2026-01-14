@@ -55,14 +55,17 @@ img {
         0 0 30px rgba(212, 175, 55, 0.2);
 }
 
-#notesLogin input {
-    color: var(--void-black);
-    background-color: var(--ivory-white);
-    border: none;
+input {
+    color: var(--ivory-white);
+    background-color: var(--void-black);
+    border-color: var(--fate-gold);
+    border-width: 1px;
 }
 
 .overlay {
     position: absolute;
+    top: 0;
+    left: 0;
     background-color: var(--veil-of-fate);
     width: 100%;
     height: 100%;
@@ -115,4 +118,11 @@ nav li a {
 nav li a:hover {
     background-color: var(--header-hover);
     color: var(--void-black);
+}
+
+textarea {
+    background-color: var(--void-black);
+    color: var(--ivory-white);
+    border-color: var(--fate-gold);
+    border-width: 1px;
 }
