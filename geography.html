@@ -87,7 +87,7 @@ const imgWidth = 2048;
 const imgHeight = 1536;
 const bounds = [[0,0],[imgHeight,imgWidth]];
 
-L.imageOverlay('theros_map.jpg', bounds).addTo(map);
+L.imageOverlay('./theros_map.jpg', bounds).addTo(map);
 map.fitBounds(bounds);
 
 map.setMaxBounds(bounds);
