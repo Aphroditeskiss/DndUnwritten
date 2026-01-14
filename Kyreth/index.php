@@ -12,5 +12,8 @@ session_start();
     <body>
         <img src="img/kyreth.png">
         <p>Kyreth</p>
+        <footer>
+            <img src="img/kyreth-pet.gif">
+        </footer>
     </body>
 </html>
