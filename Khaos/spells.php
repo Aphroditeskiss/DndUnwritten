@@ -7,13 +7,11 @@ require('inc/functions.php');
 <!DOCTYPE html>
 <html lang="en">
 <?php
-head("Khaos!")
+head("Spells")
 ?>
 <body>
     <?php
     khaosHeader();
     ?>
-    <h1>KHAOS</h1>
-    <img src="khaos.jpg" alt="khaos">
 </body>
 </html>

@@ -1,19 +1,21 @@
 <?php 
 
 require('inc/functions.php');
+$_SESSION['is_allowed'] = True;
+if ($_SESSION['is_allowed'] != True) {
+    header("location: index");
+    }
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <?php
-head("Khaos!")
+head("Notes")
 ?>
 <body>
     <?php
     khaosHeader();
     ?>
-    <h1>KHAOS</h1>
-    <img src="khaos.jpg" alt="khaos">
 </body>
 </html>
