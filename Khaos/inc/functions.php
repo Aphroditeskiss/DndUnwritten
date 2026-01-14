@@ -41,7 +41,9 @@ function khaosHeader()
 {
     ?>
     <header>
-        <a href="index">Khaos!</a>
+        <logo>
+            <a href="index">Khaos!</a>
+        </logo>
         <nav>
             <ul>
                 <li><a href="inventory">Inventory</a></li>
@@ -54,7 +56,7 @@ function khaosHeader()
     <?php
 }
 
-function notesLogin()
+function login()
 {
     ?>
     <div class="overlay">
@@ -62,17 +64,17 @@ function notesLogin()
             <form method="post">
                 <h2>Who goes there?</h2>
                 <label for="notesPassword">Password</label>
-                <input type="password" name="notesPassword" id="notesPassword"><br>
-                <input type="submit" name="notesSubmit" id="notesSubmit">
+                <input type="password" name="password" id="password"><br>
+                <input type="submit" name="loginSubmit" id="loginSubmit">
             </form>
         </div>
     </div>
     <?php
 }
 
-function verifyNotesLogin()
+function verifyLogin()
 {
-    $password = $_POST['notesPassword'];
+    $password = $_POST['password'];
     $conn = dbConnect();
 
     $sql = "SELECT * FROM noteslogin WHERE id =" . 1;
@@ -81,5 +83,10 @@ function verifyNotesLogin()
 
     if (password_verify($password, $hash['password'])) {
         $_SESSION['is_allowed'] = True;
+    } else {
+        echo '<script>
+            alert("WRONG");
+            window.history.back();
+            </script>';
     }
 }

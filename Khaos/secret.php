@@ -13,18 +13,11 @@ if (!isset($_SESSION['is_allowed']) || $_SESSION['is_allowed'] !== true) {
 <!DOCTYPE html>
 <html lang="en">
 <?php
-head("Notes")
+head("Secret")
 ?>
 <body>
     <?php
     khaosHeader();
     ?>
-    <div class="addNote">
-        <form method="post">
-            <h2>Add a note</h2>
-            <textarea name="addNote" id="addNote"></textarea><br>
-            <input type="submit" name="submitNote" id="submitNote">
-        </form>
-    </div>
 </body>
 </html>
