@@ -1,10 +1,12 @@
 <?php 
 
 require('inc/functions.php');
-$_SESSION['is_allowed'] = True;
-if ($_SESSION['is_allowed'] != True) {
-    header("location: index");
-    }
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        verifyNotesLogin();
+} 
+if (!isset($_SESSION['is_allowed']) || $_SESSION['is_allowed'] !== true) {
+    notesLogin();
+}
 
 ?>
 

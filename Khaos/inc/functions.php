@@ -53,3 +53,33 @@ function khaosHeader()
     </header>
     <?php
 }
+
+function notesLogin()
+{
+    ?>
+    <div class="overlay">
+        <div id="notesLogin">
+            <form method="post">
+                <h2>Who goes there?</h2>
+                <label for="notesPassword">Password</label>
+                <input type="password" name="notesPassword" id="notesPassword"><br>
+                <input type="submit" name="notesSubmit" id="notesSubmit">
+            </form>
+        </div>
+    </div>
+    <?php
+}
+
+function verifyNotesLogin()
+{
+    $password = $_POST['notesPassword'];
+    $conn = dbConnect();
+
+    $sql = "SELECT * FROM noteslogin WHERE id =" . 1;
+    $result = $conn->query($sql) or die($conn->error);
+    $hash = $result->fetch_assoc();
+
+    if (password_verify($password, $hash['password'])) {
+        $_SESSION['is_allowed'] = True;
+    }
+}
