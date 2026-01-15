@@ -2,13 +2,34 @@
 
 session_start();
 
-require_once('offlineDatabase.php');
-
 function dd($var)
 {
     echo "<pre>";
     var_dump($var);
     echo "</pre>";
+}
+
+function dbConnect()
+{
+    // localhost log in
+    $serverName = "localhost";
+    $userName = "root";
+    $password = "";
+    $dbName = "unwritten";
+
+    // online site database login
+    // $serverName = "sql100.infinityfree.com";
+    // $userName = "if0_40910419";
+    // $password = "kCeawXXCpgXOqqA";
+    // $dbName = "if0_40910419_theunwritten";
+
+    $conn = new mysqli($serverName, $userName, $password, $dbName);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    return $conn;
 }
 
 function head($title)
@@ -67,6 +88,7 @@ function verifyLogin()
     $conn = dbConnect();
 
     $sql = "SELECT * FROM noteslogin WHERE id =" . 1;
+    // $sql = "SELECT * FROM khaos_notes_login WHERE id =" . 1;
     $result = $conn->query($sql) or die($conn->error);
     $hash = $result->fetch_assoc();
 
@@ -90,6 +112,7 @@ function submitNote()
     $conn = dbConnect();
 
     $stmt = $conn->prepare("INSERT INTO notes (note) VALUES (?)");
+    // $stmt = $conn->prepare("INSERT INTO khaos_notes (note) VALUES (?)");
     $stmt->bind_param("s", $note);
     $stmt->execute();
 
@@ -107,6 +130,7 @@ function getNotes()
     $conn = dbConnect();
 
     $sql = "SELECT * FROM notes";
+    // $sql = "SELECT * FROM khaos_notes";
     $result = $conn->query($sql) or die($conn->error);
     $notes = $result->fetch_all(MYSQLI_ASSOC);
 
@@ -118,6 +142,7 @@ function getNote($noteId)
     $conn = dbConnect();
 
     $sql = "SELECT * FROM notes WHERE id =" . $noteId;
+    // $sql = "SELECT * FROM khaos_notes WHERE id =" . $noteId;
     $result = $conn->query($sql) or die($conn->error);
     $note = $result->fetch_assoc();
 
@@ -159,6 +184,7 @@ function submitEditNote($noteId)
     $conn = dbConnect();
 
     $stmt = $conn->prepare("UPDATE notes SET note = ? WHERE id = ?");
+    // $stmt = $conn->prepare("UPDATE notes SET khaos_note = ? WHERE id = ?");
     $stmt->bind_param("si", $note, $noteId);
     $stmt->execute();
 
@@ -180,6 +206,7 @@ function deleteNote($noteId)
     $conn = dbConnect();
 
     $stmt = $conn->prepare("DELETE FROM notes WHERE id = ?");
+    // $stmt = $conn->prepare("DELETE FROM khaos_notes WHERE id = ?");
     $stmt->bind_param("i", $noteId);
     $stmt->execute();
 
