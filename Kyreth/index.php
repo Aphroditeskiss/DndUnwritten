@@ -2,7 +2,7 @@
 session_start();
 require_once 'inc/classes.inc.php';
 $test = $db->run("SELECT * FROM test")->fetch();
-echo $test;
+print_r( $test);
 ?>
 <!DOCTYPE html>
 <html>
