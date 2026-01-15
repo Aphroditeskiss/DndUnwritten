@@ -214,14 +214,6 @@
         </div>
     </div>
 
-    <div id="passwordModal" class="modal">
-        <div class="modal-content">
-            <h2 id="modalTitle">Enter the Secret Word</h2>
-            <input type="password" id="passwordInput" placeholder="Password..." autocomplete="off"/>
-            <button id="submitPassword">Unlock Realm</button>
-            <div class="error" id="errorMsg"></div>
-        </div>
-    </div>
 
     <div id="portal-overlay">
         <div class="portal"></div>
@@ -261,77 +253,16 @@
             canvas.height = window.innerHeight;
         });
 
-        const passwords = {
-            athena: "Ath3na!",
-            kyreth: "Kyr3th",
-            khaos: "Kh@os",
-            elysia: "Elys1a",
-        };
+            const characterButtons = document.querySelectorAll('.character-btn');
 
-        const modal = document.getElementById('passwordModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const passwordInput = document.getElementById('passwordInput');
-        const submitBtn = document.getElementById('submitPassword');
-        const errorMsg = document.getElementById('errorMsg');
-        const overlay = document.getElementById('portal-overlay');
-        const portal = document.querySelector('.portal');
-        const portalText = document.getElementById('portal-text');
-
-        let currentChar = null;
-        let currentRealm = null;
-
-        document.querySelectorAll('.character-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                currentChar = btn.dataset.char;
-                currentRealm = btn.dataset.realm;
-
-                modalTitle.textContent = `Realm of ${currentChar.charAt(0).toUpperCase() + currentChar.slice(1)}`;
-                modal.style.display = 'flex';
-                passwordInput.value = '';
-                errorMsg.textContent = '';
-                passwordInput.focus();
-            });
-        });
-
-        submitBtn.addEventListener('click', () => {
-            const input = passwordInput.value.trim();
-            const correctPassword = passwords[currentChar];
-
-            if (input === correctPassword) {
-                portalText.textContent = `Entering the Realm of ${currentChar}...`;
-                overlay.style.display = 'flex';
-
-                setTimeout(() => {
-                    portal.style.transition = 'transform 2s ease-out, opacity 1s ease-in';
-                    portal.style.transform = 'scale(20)';
-                    portal.style.opacity = '1';
-
-                    setTimeout(() => portalText.style.opacity = '1', 800);
-
-                    setTimeout(() => {
-                        overlay.style.background = 'radial-gradient(circle, #ffd700, #ffffff)';
-                        overlay.style.transition = 'background 1s ease';
-                        setTimeout(() => window.location.href = currentRealm, 1000);
-                    }, 2600);
-                }, 100);
-            } else {
-                errorMsg.textContent = "Wrong password... Access denied.";
-                errorMsg.classList.add('shake');
-                setTimeout(() => errorMsg.classList.remove('shake'), 500);
+    characterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const link = btn.dataset.realm; 
+            if(link) {
+                window.location.href = link;
             }
         });
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-
-        passwordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                submitBtn.click();
-            }
-        });
+    });
     </script>
 </body>
 </html>
