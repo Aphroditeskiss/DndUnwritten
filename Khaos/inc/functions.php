@@ -41,7 +41,7 @@ function head($title)
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?php echo $title ?></title>
         <link rel="stylesheet" href="style/main.css">
-        <link rel="shortcut icon" href="images/Khaos.gif" type="image/x-icon">
+        <link rel="shortcut icon" href="images/khaos.gif" type="image/x-icon">
     </head>
     <?php
 }
