@@ -2,6 +2,8 @@
 
 session_start();
 
+require_once('offlineDatabase.php');
+
 function dd($var)
 {
     echo "<pre>";
@@ -9,30 +11,16 @@ function dd($var)
     echo "</pre>";
 }
 
-function dbConnect()
-{
-    $serverName = "localhost";
-    $userName = "root";
-    $password = "";
-    $dbName = "unwritten";
-
-    $conn = new mysqli($serverName, $userName, $password, $dbName);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    return $conn;
-}
-
 function head($title)
 {
     ?>
+
     <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $title ?></title>
-    <link rel="stylesheet" href="style/main.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><?php echo $title ?></title>
+        <link rel="stylesheet" href="style/main.css">
+        <link rel="shortcut icon" href="images/Khaos.gif" type="image/x-icon">
     </head>
     <?php
 }
@@ -110,7 +98,7 @@ function submitNote()
 
     echo '<script>
             alert("Submitted!");
-            window.redirect.href(notes);
+            window.location.href= "notes"
             </script>';
 }
 
@@ -153,9 +141,54 @@ function displayNotes()
         <p><?php echo $note['note'] ?></p><br>
         <form method="post">
             <textarea name="editNote" id="editNote"><?php echo $note['note'] ?></textarea><br>
-            <input type="submit" name="editNote" id="editNote">
+            <input type="submit" name="submitEditNote" id="submitEditNote">
             <input type="submit" name="deleteNote" id="deleteNote" value="Delete">
         </form>
         <?php
     }
+}
+
+function submitEditNote($noteId)
+{
+    $note = trim($_POST['editNote']);
+
+    if ($noteId <= 0 || $note === '') {
+        return;
+    }
+
+    $conn = dbConnect();
+
+    $stmt = $conn->prepare("UPDATE notes SET note = ? WHERE id = ?");
+    $stmt->bind_param("si", $note, $noteId);
+    $stmt->execute();
+
+    $stmt->close();
+    $conn->close();
+
+    header("Location: notes?noteId=" . $noteId);
+    exit;
+}
+
+function deleteNote($noteId)
+{
+    $noteId = (int) $noteId;
+
+    if ($noteId <= 0) {
+        return;
+    }
+
+    $conn = dbConnect();
+
+    $stmt = $conn->prepare("DELETE FROM notes WHERE id = ?");
+    $stmt->bind_param("i", $noteId);
+    $stmt->execute();
+
+    $stmt->close();
+    $conn->close();
+
+    echo '<script>
+            alert("Note Deleted!");
+            window.location.href= "notes"
+            </script>';
+    exit;
 }

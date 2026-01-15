@@ -10,6 +10,12 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submitNote'])) {
     submitNote();
 }
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submitEditNote'])) {
+    submitEditNote($_GET['noteId']);
+}
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteNote'])) {
+    deleteNote($_GET['noteId']);
+}
 
 ?>
 
