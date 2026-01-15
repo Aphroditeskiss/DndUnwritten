@@ -252,6 +252,17 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
+
+            const characterButtons = document.querySelectorAll('.character-btn');
+
+    characterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const link = btn.dataset.realm; 
+            if(link) {
+                window.location.href = link;
+            }
+        });
+    });
     </script>
 </body>
 </html>
