@@ -4,8 +4,8 @@ class Database {
     protected static $instance;
     protected $db;
 
-    private $host = "localhost", $username = "root", $password = "", $database = "theunwritten";
-    // private $host = "sql100.infinityfree.com", $username = "if0_40910419", $password = "kCeawXXCpgXOqqA", $database = "if0_40910419_theunwritten";
+    // private $host = "localhost", $username = "root", $password = "", $database = "theunwritten";
+    private $host = "sql100.infinityfree.com", $username = "if0_40910419", $password = "kCeawXXCpgXOqqA", $database = "if0_40910419_theunwritten";
 
     private function __construct() {
         try {
