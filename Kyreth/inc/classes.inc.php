@@ -2,4 +2,7 @@
 
 // database class
 require_once 'classes/class.db.php';
-$db = Database::instance();
+$Db = Database::instance();
+// // core class
+// require_once 'classes/class.core.php';
+// $Core = Core::instance();
