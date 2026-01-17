@@ -1,12 +1,46 @@
-body {
+/* header */
+header {
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+    background-color: darkgreen;
+}
+
+nav ul{
     margin: 0px;
+    padding: 0px;
+    list-style: none;
+    display: flex;
 }
 
-html {
-    background-color: green;
+nav li a {
     color: white;
+    padding: 26px;
+    display: inline-block;
+    text-decoration: none;
+    transition: transform 100ms ease, background-color 50ms ease;
 }
 
+nav li a:hover {
+    transform: scale(1.15);
+}
+
+nav ul li a.active {
+  background-color: #04AA6D;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 14px;
+    margin-left: 20px;
+}
+
+
+/* footer */
 footer {
     text-align: center;
     display: flex;
@@ -17,16 +51,13 @@ footer {
     background-color: darkgreen;
 }
 
-header {
-    width: 100vw;
-    display: flex;
-    gap: 25px;
-    box-sizing: border-box;
-    padding: 25px;
 
-    background-color: darkgreen;
+/* other stuff */
+body {
+    margin: 0px;
 }
 
-header img {
-    width: 50px;
+html {
+    background-color: green;
+    color: white;
 }
