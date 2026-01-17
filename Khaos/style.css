@@ -1,7 +1,8 @@
 body {
     background-color: #007474;
     margin: 0;
-
+    padding-top: 5%;
+    overflow-x: hidden;
 }
 
 header {
@@ -11,6 +12,11 @@ header {
     padding: 10px;
     height: auto;
     width: 100%;
+}
+
+img {
+    width: 100px;
+    height: auto;
 }
 
 footer {

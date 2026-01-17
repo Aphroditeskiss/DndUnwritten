@@ -24,7 +24,8 @@
         <li>ultimate Rizzler</li>
         <li>ver good looking</li>
     </ul>
-    <img src="images/khaos.jpg">
+    <img src="images/khaos.jpg"><br>
+    <p>i was hoping to get octobercms working, but until then you just have to live with this :)</p>
     <img src="images/khaos.gif">
 
     <footer>&copy; Khaos 2026</footer>
