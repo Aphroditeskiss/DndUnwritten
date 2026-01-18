@@ -1,11 +1,13 @@
 :root {
     --boobie: #800813;
     --bigger-boobie: #630000;
+    --biggest-boobie: #500000;
 }
 
 body {
     background: var(--boobie);
     margin: 0;
+    min-height: 100vh;
 }
 
 header {
@@ -21,6 +23,19 @@ h1 {
     margin-bottom: 0.5rem;
 }
 
+.container {
+    max-width: 800px;
+    width: 90%;
+    margin: 40px auto;
+
+    padding: 24px;
+    background: #00000026;
+
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
 nav ul {
     list-style: none;
     padding: 0;
@@ -34,9 +49,91 @@ nav ul {
 nav a {
     font-size: 1rem;
     text-decoration: none;
-    color: #ffffff6c;
+    color: #ffffffd0;
 }
 
 nav a:hover {
     text-decoration: underline;
+}
+
+.slider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.slider img {
+    width: 180px;
+    height: 240px;
+    object-fit: cover;
+
+    display: block;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.arrow {
+    width: 40px;
+    height: 40px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    background: var(--bigger-boobie);
+    border: 2px solid #ffffffb3;
+    border-radius: 8px;
+
+    color: white;
+    cursor: pointer;
+}
+
+.arrow:hover {
+    background-color: var(--biggest-boobie);
+}
+
+.arrow.left {
+    left: -45px;
+}
+
+.arrow.right {
+    right: -45px;
+}
+
+.container ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 16px;
+
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.container ul a {
+    color: #ffffffc7;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.container ul a:hover {
+    text-decoration: underline;
+}
+
+.intro {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffffd0;
+    margin: 0 0 16px 0;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }

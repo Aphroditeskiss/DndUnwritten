@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="css/athena.css" />
-        <link rel="icon" type="image/x-icon" href="ATHENASPRITE67.png">
+        <link rel="icon" type="image/x-icon" href="ATHENASPRITE67.png" />
         <title>HOME SCREEN</title>
     </head>
     <body>
@@ -12,12 +12,32 @@
             <h1>ATHENA!!!</h1>
             <nav>
                 <ul>
-                    <li><a href="#">Features</a></li>
-                    <li><a href="#">Items</a></li>
+                    <li><a href="feature.html">Features</a></li>
+                    <li><a href="item.html">Items</a></li>
                 </ul>
             </nav>
         </header>
-        <img src="ATHENA.jpg">
-        <p>RAAAAAAGGHHHHHHHHH --- HII!!! IM ATHENA!!</p>
+            
+        <div class="container">
+            <div class="slider">
+                <img id="athenaImage" src="ATHENA.jpg">
+
+                <div class="controls">
+                    <button class="arrow" onclick="prevImage()">&#8592;</button>
+                    <button class="arrow" onclick="nextImage()">&#8594;</button>
+                </div>
+            </div>
+
+            <div class="content">
+                <p class="intro">"RAAAAAAGGHHHHHHHHH --- HII!!! IM ATHENA!!"</p>
+
+                <ul>
+                    <li><a href="https://open.spotify.com/playlist/4PeqLCi3uGqXrOGL9Rxvnh?si=fc4ab93486e44c0a">Spotify</a></li>
+                    <li><a href="https://www.dndbeyond.com/characters/146489439/o4NFz7">Character Sheet</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <script src="js/athena.js"></script>
     </body>
 </html>
