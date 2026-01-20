@@ -3,5 +3,32 @@
 {% block body %}
 <main> 
     <h1>inventory</h1>
+    {% for item in inv %}
+        <div>
+            <div>
+                <a id="item{{loop.index}}">{{ item.Name }} ▲</a>
+            </div>
+            <div id="item_closed{{loop.index}}" style="display: none;">
+                {{item.Description}}
+            </div>
+        </div>
+    {% endfor %}
 </main>
+{% endblock %}
+
+{% block script %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const video = document.getElementById('video')
+        const body = document.getElementById('video')
+
+        body.addEventListener('click', function() {
+            if (video.muted == false) {
+                video.muted = true;
+            } else {
+                video.muted = false;
+            }
+        });
+    });
+</script>
 {% endblock %}
