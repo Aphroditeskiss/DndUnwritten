@@ -3,4 +3,4 @@ require __DIR__ . '/inc/bootstrap.php';
 
 
 
-renderTwig($twig, $template);
+$Core->renderTwig($twig, $template);

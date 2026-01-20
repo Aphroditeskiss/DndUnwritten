@@ -1,4 +1,6 @@
 <?php
+SESSION_START();
+
 require_once __DIR__ . '/classes.inc.php';
 require_once __DIR__ . '/functions.php';
 
