@@ -80,18 +80,18 @@ body {
 .modal-body-relative {
     position: relative;
     display: inline-block;
-    max-width: 100%;
+    max-width: 65;
 }
 
 .modal-content {
    position: relative;
    background: transparent;
    margin: 0;
-   padding: 0;
+   padding: 30px;
    width: 90vw;
-   max-width: 1200px;
+   max-width: 1400px;
    max-height: 90vh;
-   overflow: auto;
+   overflow: visible;
    border: none;
    border-radius: 0;
    box-shadow: none;
@@ -101,9 +101,57 @@ body {
     display: block;
     width: 100%;
     height: auto;
-    max-height: 85vh;
+    max-height: 80vh;
     object-fit: contain;
-    margin: 0 auto;
+    margin: 0;
+}
+
+.modal.show-face-info .modal-content {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    max-width: 1400px;          
+    background: rgba(30, 30, 40, 0.92);   
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.modal-body-portrait {
+    flex: 1;
+    position: relative;
+    min-width: 50%;
+    max-width: 60%;
+    background: #111;           
+}
+
+.modal-body-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.modal-body-info {
+    flex: 1;
+    padding: 30px;
+    background: #1e1e2e;        
+    color: #e0e0ff;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal-body-info h2 {
+    margin-top: 0;
+    color: #ffd700;             
+}
+
+.modal-body-info p {
+    line-height: 1.6;
+}
+
+.modal:not(.show-face-info) .modal-content {
+    background: transparent;
 }
 
 .close-modal {
@@ -120,4 +168,34 @@ body {
 
 .close-modal:hover {
     color: black;
+}
+
+.face-hotspot:hover {
+    box-shadow: 0 0 0 3px rgba(255, 255, 100, 0.6);
+    transition: box-shadow 0.2s;
+}
+
+.info-sidebar {
+    position: absolute;
+    top: 0;
+    right: -38%;                     
+    width: 32%;                      
+    min-width: 320px;
+    background: rgba(30, 30, 40, 0.95);
+    color: #f0f0f0;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 5;
+    display: none;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.info-sidebar.visible {
+    opacity: 1;
+    transform: translateX(0);
 }
