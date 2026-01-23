@@ -178,7 +178,7 @@ body {
 .info-sidebar {
     position: absolute;
     top: 0;
-    right: -38%;                     
+    right: -70%;                     
     width: 32%;                      
     min-width: 320px;
     background: rgba(30, 30, 40, 0.95);
@@ -189,8 +189,6 @@ body {
     max-height: 80vh;
     overflow-y: auto;
     z-index: 5;
-    /* display: none;
-    opacity: 0; */
     transform: translateX(20px);
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
