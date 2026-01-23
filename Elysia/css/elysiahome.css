@@ -170,11 +170,6 @@ body {
     color: black;
 }
 
-.face-hotspot:hover {
-    box-shadow: 0 0 0 3px rgba(255, 255, 100, 0.6);
-    transition: box-shadow 0.2s;
-}
-
 .info-sidebar {
     position: absolute;
     top: 0;
