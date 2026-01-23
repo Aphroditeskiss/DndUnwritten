@@ -10,7 +10,7 @@ body {
 
 #room-view {
     position: relative;
-    width: 80vw;
+    width: 80vw;           
     height: 80vh;
     background-size: cover;
     background-position: center;
@@ -22,23 +22,102 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.4);
     color: white;
     border: none;
-    padding: 20px;
-    font-size: 24px;
+    padding: 18px 24px;
+    font-size: 32px;
     cursor: pointer;
     z-index: 10;
+    border-radius: 50%;
 }
 
-#left-arrow {
-    left: 10px;
-}
-
-#right-arrow {
-    right: 10px;
-}
+#left-arrow  { left:  20px; }
+#right-arrow { right: 20px; }
 
 .arrow:hover {
-    background-color: rgba(0,0,0,0.8)
+    background: rgba(0,0,0,0.7);
+}
+
+.hotspot {
+    display: none;
+    position: absolute;
+    cursor: pointer;
+    background: rgba(255,255,0,0.0);   
+    border: 1px dashed rgba(255,255,0,0.0);
+    pointer-events: auto;
+}
+
+.hotspot:hover {
+    filter: brightness(1.1);
+    transform: scale (1.02);
+    transition: all 0.15s ease;
+}
+
+#hotspot-portrait {
+    pointer-events: auto;
+    z-index: 5;
+}
+
+.face-hotspot {
+    position: absolute;
+    cursor: pointer;
+    background: transparent;
+    pointer-events: auto;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-body-relative {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.modal-content {
+   position: relative;
+   background: transparent;
+   margin: 0;
+   padding: 0;
+   width: 90vw;
+   max-width: 1200px;
+   max-height: 90vh;
+   overflow: auto;
+   border: none;
+   border-radius: 0;
+   box-shadow: none;
+}
+
+.modal img.full-pop {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 85vh;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+.close-modal {
+    position: absolute;
+    right: 25px;
+    top: 15px;
+    font-size: 50px;
+    cursor: pointer;
+    color: white;
+    cursor: pointer;
+    z-index: 101;
+    text-shadow: 0 0 5px black;
+}
+
+.close-modal:hover {
+    color: black;
 }
