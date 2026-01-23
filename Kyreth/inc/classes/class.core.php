@@ -2,6 +2,7 @@
 
 class Core {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     protected $db;
 
     public function __construct() {
@@ -11,6 +12,8 @@ class Core {
     public function renderTwig($twig, $template) {
         echo $twig->render(basename($_SERVER['REQUEST_URI']). '.twig', $template);
 =======
+=======
+>>>>>>> Stashed changes
     protected static $instance;
 
     public function __construct() {
@@ -26,6 +29,9 @@ class Core {
     
     public function render() {
         echo $twig->render(basename($_SERVER['REQUEST_URI']). '.twig', $template)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     }
 }
