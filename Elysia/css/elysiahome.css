@@ -178,11 +178,11 @@ body {
 .info-sidebar {
     position: absolute;
     top: 0;
-    right: -70%;                     
+    right: -60%;                     
     width: 32%;                      
     min-width: 320px;
-    background: rgba(30, 30, 40, 0.95);
-    color: #f0f0f0;
+    background: rgba(167, 144, 116, 0.95);
+    color: #000000;
     padding: 25px 30px;
     border-radius: 12px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.7);
