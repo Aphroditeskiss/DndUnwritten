@@ -1,13 +1,19 @@
 :root {
     --boobie: #800813;
     --bigger-boobie: #630000;
+<<<<<<< Updated upstream
     --biggest-boobie: #500000;
+=======
+>>>>>>> Stashed changes
 }
 
 body {
     background: var(--boobie);
     margin: 0;
+<<<<<<< Updated upstream
     min-height: 100vh;
+=======
+>>>>>>> Stashed changes
 }
 
 header {
@@ -23,6 +29,7 @@ h1 {
     margin-bottom: 0.5rem;
 }
 
+<<<<<<< Updated upstream
 .container {
     max-width: 800px;
     width: 90%;
@@ -36,6 +43,8 @@ h1 {
     align-items: center;
 }
 
+=======
+>>>>>>> Stashed changes
 nav ul {
     list-style: none;
     padding: 0;
@@ -49,12 +58,17 @@ nav ul {
 nav a {
     font-size: 1rem;
     text-decoration: none;
+<<<<<<< Updated upstream
     color: #ffffffd0;
+=======
+    color: #ffffff6c;
+>>>>>>> Stashed changes
 }
 
 nav a:hover {
     text-decoration: underline;
 }
+<<<<<<< Updated upstream
 
 .slider {
     display: flex;
@@ -137,3 +151,5 @@ nav a:hover {
     flex-direction: column;
     align-items: flex-start;
 }
+=======
+>>>>>>> Stashed changes

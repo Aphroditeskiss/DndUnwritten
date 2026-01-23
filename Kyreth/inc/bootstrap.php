@@ -1,6 +1,11 @@
 <?php
+<<<<<<< Updated upstream
 SESSION_START();
 require_once __DIR__ . '/classes.inc.php';
+=======
+require_once __DIR__ . '/classes.inc.php';
+require_once __DIR__ . '/functions.php';
+>>>>>>> Stashed changes
 
 // twig setup
 require_once __DIR__ . '/../vendor/autoload.php';
